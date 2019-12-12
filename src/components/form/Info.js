@@ -31,30 +31,29 @@ class Info extends React.Component {
         ];
     }
 
-    durationCallback = (callback) => {
-        this.props.form.duration = callback;
+
+    countPrice = ()=>{
         this.props.form.price = this.props.form.duration * this.props.form.amount * 2;
         if (this.props.form.upfrontPayment) {
             this.props.form.price = this.props.form.duration * this.props.form.amount * 2 - (1000 / this.props.form.price).toFixed(2);
         }
+    };
+
+    durationCallback = (callback) => {
+        this.props.form.duration = callback;
+        this.countPrice();
         this.props.update(this.props.form);
     };
 
     amountCallback = (callback) => {
         this.props.form.amount = callback;
-        this.props.form.price = this.props.form.duration * this.props.form.amount * 2;
-        if (this.props.form.upfrontPayment) {
-            this.props.form.price = this.props.form.duration * this.props.form.amount * 2 - (1000 / this.props.form.price).toFixed(2);
-        }
+        this.countPrice();
         this.props.update(this.props.form);
     };
 
     paymentCallback = () => {
         this.props.form.upfrontPayment = !this.props.form.upfrontPayment;
-        this.props.form.price = this.props.form.duration * this.props.form.amount * 2;
-        if (this.props.form.upfrontPayment) {
-            this.props.form.price = this.props.form.duration * this.props.form.amount * 2 - (1000 / this.props.form.price).toFixed(2);
-        }
+        this.countPrice();
         this.props.update(this.props.form);
     };
 
