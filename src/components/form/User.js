@@ -3,7 +3,12 @@ import Input from "../input/Input";
 
 
 class User extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            form:props.form
+        }
+    };
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -18,16 +23,16 @@ class User extends React.Component {
                         <label>
                             Last name <span className="required">*</span>
                         </label>
-                        <Input value={this.props.form.lastName.value}
+                        <Input value={this.state.form.lastName.value}
                                update={callback => {
-                                   this.props.form.lastName.value = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.lastName.value = callback});
+                                   this.props.update(this.state.form)
                                }}
                                validation="required|alpha_space"
                                fieldValidation="lastName"
                                validate={callback => {
-                                   this.props.form.lastName.validate = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.lastName.validate = callback});
+                                   this.props.update(this.state.form)
                                }}
                         />
 
@@ -36,16 +41,16 @@ class User extends React.Component {
                         <label>
                             First name <span className="required">*</span>
                         </label>
-                        <Input value={this.props.form.firstName.value}
+                        <Input value={this.state.form.firstName.value}
                                update={callback => {
-                                   this.props.form.firstName.value = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.firstName.value = callback});
+                                   this.props.update(this.state.form)
                                }}
                                validation="required|alpha_space"
                                fieldValidation="firstName"
                                validate={callback => {
-                                   this.props.form.firstName.validate = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.firstName.validate = callback});
+                                   this.props.update(this.state.form)
                                }}
                         />
                     </div>
@@ -53,16 +58,16 @@ class User extends React.Component {
                         <label>
                             Email <span className="required">*</span>
                         </label>
-                        <Input value={this.props.form.email.value}
+                        <Input value={this.state.form.email.value}
                                update={callback => {
-                                   this.props.form.email.value = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.email.value = callback});
+                                   this.props.update(this.state.form)
                                }}
                                validation="required|email"
                                fieldValidation="email"
                                validate={callback => {
-                                   this.props.form.email.validate = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.email.validate = callback});
+                                   this.props.update(this.state.form)
                                }}
                         />
                     </div>
@@ -70,16 +75,16 @@ class User extends React.Component {
                         <label>
                             Street Address <span className="required">*</span>
                         </label>
-                        <Input value={this.props.form.streetAddress.value}
+                        <Input value={this.state.form.streetAddress.value}
                                update={callback => {
-                                   this.props.form.streetAddress.value = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.streetAddress.value = callback});
+                                   this.props.update(this.state.form)
                                }}
                                validation="required|alpha_space"
                                fieldValidation="streetAddress"
                                validate={callback => {
-                                   this.props.form.streetAddress.validate = callback;
-                                   this.props.update(this.props.form)
+                                   this.setState((state) =>{state.form.streetAddress.validate = callback});
+                                   this.props.update(this.state.form)
                                }}
                         />
                     </div>
@@ -88,10 +93,10 @@ class User extends React.Component {
                                onClick={this.props.previousStep}/>
                         <input type="submit"
                                className=" btn btn-primary"
-                               disabled={!(this.props.form.lastName.validate
-                                   && this.props.form.firstName.validate
-                                   && this.props.form.email.validate
-                                   && this.props.form.streetAddress.validate)}
+                               disabled={!(this.state.form.lastName.validate
+                                   && this.state.form.firstName.validate
+                                   && this.state.form.email.validate
+                                   && this.state.form.streetAddress.validate)}
                                value="Next >"/>
                     </div>
                 </form>

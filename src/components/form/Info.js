@@ -3,8 +3,8 @@ import Radio from "../input/Radio";
 import Switch from "../input/Switch";
 
 class Info extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.duration = [
             {
                 option: 3
@@ -29,32 +29,35 @@ class Info extends React.Component {
                 option: 50
             },
         ];
+        this.state = {
+            form:props.form
+        }
     }
 
 
     countPrice = ()=>{
-        this.props.form.price = this.props.form.duration * this.props.form.amount * 2;
-        if (this.props.form.upfrontPayment) {
-            this.props.form.price = this.props.form.duration * this.props.form.amount * 2 - (1000 / this.props.form.price).toFixed(2);
+        this.setState((state) =>{state.form.price=state.form.duration*state.form.amount * 2});
+        if (this.state.form.upfrontPayment) {
+            this.setState((state) =>{state.form.price = state.form.duration * state.form.amount * 2 - (1000 / state.form.price).toFixed(2)});
         }
     };
 
     durationCallback = (callback) => {
-        this.props.form.duration = callback;
+        this.setState((state) =>{state.form.duration = callback});
         this.countPrice();
-        this.props.update(this.props.form);
+        this.props.update(this.state.form);
     };
 
     amountCallback = (callback) => {
-        this.props.form.amount = callback;
+        this.setState((state) =>{state.form.amount = callback});
         this.countPrice();
-        this.props.update(this.props.form);
+        this.props.update(this.state.form);
     };
 
     paymentCallback = () => {
-        this.props.form.upfrontPayment = !this.props.form.upfrontPayment;
+        this.setState((state) =>{state.form.upfrontPayment = !state.form.upfrontPayment});
         this.countPrice();
-        this.props.update(this.props.form);
+        this.props.update(this.state.form);
     };
 
     handleSubmit = (event) => {
@@ -72,7 +75,7 @@ class Info extends React.Component {
                         </label>
                         <div className="d-flex">
                             <Radio callback={this.durationCallback} listOptions={this.duration}
-                                   selected={this.props.form.duration}/>
+                                   selected={this.state.form.duration}/>
                         </div>
                     </div>
                     <div className="form-group col-auto">
@@ -81,7 +84,7 @@ class Info extends React.Component {
                         </label>
                         <div className="d-flex">
                             <Radio callback={this.amountCallback} listOptions={this.amount}
-                                   selected={this.props.form.amount}/>
+                                   selected={this.state.form.amount}/>
                         </div>
                     </div>
                     <div className="form-group col-auto">
@@ -89,7 +92,7 @@ class Info extends React.Component {
                             Upfront payment
                         </label>
                         <span>
-                            <Switch isOn={this.props.form.upfrontPayment} handleToggle={this.paymentCallback}/>
+                            <Switch isOn={this.state.form.upfrontPayment} handleToggle={this.paymentCallback}/>
                             <input className="float-right btn btn-primary" type="submit" value="Next >"/>
                         </span>
                     </div>

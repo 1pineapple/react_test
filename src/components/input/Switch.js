@@ -3,18 +3,32 @@ import './Switch.css';
 
 class Switch extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOn: props.isOn
+        }
+    };
+
+    handleChange = (event) => {
+        this.setState( {
+            isOn:event.target.checked
+        });
+        this.props.handleToggle();
+    };
+
     render() {
         return (
             <>
                 <input
-                    checked={this.props.isOn}
-                    onChange={this.props.handleToggle}
+                    checked={this.state.isOn}
+                    onChange={this.handleChange}
                     className="react-switch-checkbox"
                     id={`react-switch-new`}
                     type="checkbox"
                 />
                 <label
-                    style={{ background: this.props.isOn && '#2196F3' }}
+                    style={{background: this.state.isOn && '#2196F3'}}
                     className="react-switch-label"
                     htmlFor={`react-switch-new`}
                 >
