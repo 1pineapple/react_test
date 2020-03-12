@@ -1,3 +1,26 @@
+## Task
+Implement a subscription order process for a cloud storage provider with React stack.
+
+Subscription order process has 4 steps:
+
+1. Select subscription parameters:
+  - Duration: 3/6/12 Months (default: 12)
+  - Amount of gigabytes in a cloud: 3/5/10/20/30/50 (default: 5)
+  - Upfront payment: yes/no (default: no)
+
+2. User data: Last name, First name, Email, Street Address
+3. Credit Card data: Card number, Card expiration date, Card security code
+4. Confirmation: Order summary inclusing selected subscription parameters and the computed price, Terms agreement checkbox, Confirm button.
+
+- All parameters are required
+- A user should be able to change steps by clicking on Next or Back button.
+- Every step needs to be completed in order to see the next one.
+- Confirm button click handler should send data to an API endpoint [https://httpbin.org/post](https://httpbin.org/post)
+
+Price calculation:
+- One gigabyte in cloud costs 2$ per month.
+- Upfront payment adds a 10% discount.
+
 ## Available Scripts
 
 In the project directory, you can run:
